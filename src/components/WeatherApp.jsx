@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "./ui/card";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 import { Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -24,7 +24,7 @@ import { motion, AnimatePresence } from "framer-motion";
  * Add <WeatherApp /> to your component tree.
  */
 
-const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+const API_KEY = process.env.REACT_APP_WEATHER_API_KEY; // CRA style
 
 export default function WeatherApp() {
   const [city, setCity] = useState("Berlin");
