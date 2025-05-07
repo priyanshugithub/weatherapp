@@ -4,6 +4,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import AnimatedSky from "./AnimatedSky";
 
 /**
  * WeatherApp
@@ -91,6 +92,14 @@ export default function WeatherApp() {
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-br from-sky-50 to-indigo-100 p-6">
       <header className="w-full max-w-md flex gap-2 mb-6">
+      <main className="relative min-h-screen overflow-x-hidden text-white">
+    <AnimatedSky condition={weather.main} hour={hour} />
+    {weather.main.includes("Cloud") && <CloudLayer speed={40} opacity={0.15} />}
+    <NowPane city={city} temp={weather.temp} description={weather.desc} />
+    <HourlyScroll list={hourlyData} />
+    <DailyGrid list={dailyData} />
+  </main>
+      {/* <AnimatedSky condition={weather.main} hour={new Date().getHours()} />
         <Input
           placeholder="Search city…"
           value={city}
@@ -103,7 +112,7 @@ export default function WeatherApp() {
           disabled={loading}
         >
           <Search className="h-5 w-5" />
-        </Button>
+        </Button> */}
       </header>
 
       <AnimatePresence>
