@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "./ui/card";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Search } from "lucide-react";
+// import { Button } from "./ui/button";
+// import { Input } from "./ui/input";
+// import { Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedSky from "./AnimatedSky";
+// import HourlyScroll from "./HourlyScroll";
 
 /**
  * WeatherApp
@@ -33,6 +34,7 @@ export default function WeatherApp() {
   const [forecast, setForecast] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const hour = new Date().getHours();          // 0‒23
 
   // Fetch initial data for default city
   useEffect(() => {
@@ -93,11 +95,16 @@ export default function WeatherApp() {
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-br from-sky-50 to-indigo-100 p-6">
       <header className="w-full max-w-md flex gap-2 mb-6">
       <main className="relative min-h-screen overflow-x-hidden text-white">
-    <AnimatedSky condition={weather.main} hour={hour} />
-    {weather.main.includes("Cloud") && <CloudLayer speed={40} opacity={0.15} />}
-    <NowPane city={city} temp={weather.temp} description={weather.desc} />
+   
+ {weather && (
+   <AnimatedSky
+     condition={weather.weather[0].main}   // "Clear", "Clouds", "Rain", …
+     hour={hour}
+   />
+ )}
+    {/* <NowPane city={city} temp={weather.temp} description={weather.desc} />
     <HourlyScroll list={hourlyData} />
-    <DailyGrid list={dailyData} />
+    <DailyGrid list={dailyData} /> */}
   </main>
       {/* <AnimatedSky condition={weather.main} hour={new Date().getHours()} />
         <Input

@@ -1,4 +1,5 @@
 import { Scroll } from "lucide-react"; // or any icon set
+import { formatHour } from "../utils/date";
 
 function HourlyScroll({ list }) {
   return (
